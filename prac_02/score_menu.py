@@ -2,6 +2,7 @@ MENU = "(G)et a valid score\n(P)rint result\n(S)how stars \n(Q)uit"
 
 
 def main():
+    score = get_valid_score()
     print(f"Menu:\n{MENU}")
     choice = input("Choose: ").upper()
     while choice != "Q":

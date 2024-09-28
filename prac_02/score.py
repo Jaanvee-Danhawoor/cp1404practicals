@@ -6,6 +6,7 @@ import random
 
 
 def main():
+    """Print score status given score"""
     score = float(input("Enter score: "))
     score_status = determine_score_status(score)
     print(score_status)
@@ -15,6 +16,7 @@ def main():
 
 
 def determine_score_status(score):
+    """Determine score status"""
     if score < 0 or score > 100:
         return "Invalid Score"
     elif score < 50:

@@ -1,7 +1,9 @@
+"""Score Menu Program"""
 MENU = "(G)et a valid score\n(P)rint result\n(S)how stars \n(Q)uit"
 
 
 def main():
+    """Menu-driven program about valid scores"""
     score = get_valid_score()
     print(f"Menu:\n{MENU}")
     choice = input("Choose: ").upper()
@@ -20,6 +22,7 @@ def main():
 
 
 def get_valid_score():
+    """Get valid score"""
     score = int(input("Score: "))
     while score < 0 or score > 100:
         print("Invalid score")
@@ -28,6 +31,7 @@ def get_valid_score():
 
 
 def print_result(score):
+    """Print result based on store"""
     if score < 50:
         print("Bad")
     elif score < 90:
@@ -37,6 +41,7 @@ def print_result(score):
 
 
 def show_stars(score):
+    """Print as many stars as score"""
     print("*" * score)
 
 

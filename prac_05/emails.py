@@ -6,7 +6,7 @@ Actual:   20 minutes
 
 
 def main():
-    """Create dictionary of emails to names"""
+    """Create dictionary of emails to names."""
     email_to_name = {}
     email = input("Email: ")
     while email != "":
@@ -21,7 +21,7 @@ def main():
 
 
 def extract_name_from_email(email):
-    """Extract expected name from email address"""
+    """Extract expected name from email address."""
     name_part = email.split('@')[0]
     name = name_part.replace('.', ' ').title()
     return name

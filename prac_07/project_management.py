@@ -23,7 +23,7 @@ def main():
         elif choice == "S":
             pass
         elif choice == "D":
-            pass
+            display_projects(projects)
         elif choice == "F":
             pass
         elif choice == "A":
@@ -45,6 +45,15 @@ def load_projects(projects, filename):
             start_date = datetime.strptime(parts[1], "%d/%m/%Y").date()
             project = Project(parts[0], start_date, int(parts[2]), float(parts[3]), float(parts[4]))
             projects.append(project)
+
+
+def display_projects(projects):
+    """Display projects."""
+    projects.sort()
+    print("Completed Projects:")
+    [print(project) for project in projects if project.is_complete()]
+    print("Incomplete Projects:")
+    [print(project) for project in projects if not project.is_complete()]
 
 
 main()

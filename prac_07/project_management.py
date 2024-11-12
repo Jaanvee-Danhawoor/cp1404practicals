@@ -115,7 +115,7 @@ def get_valid_number(prompt):
 
 
 def get_valid_percentage(prompt):
-    """Get a valid percentage between 0 and 100"""
+    """Get a valid percentage between 0 and 100."""
     is_valid_input = False
     while not is_valid_input:
         try:
@@ -130,6 +130,7 @@ def get_valid_percentage(prompt):
 
 
 def add_new_project(projects):
+    """Add new project to projects."""
     print("Let's add a new project")
     name = get_valid_name("Name: ").title()
     start_date = get_valid_date("Start date (dd/mm/yyyy): ")
@@ -141,6 +142,7 @@ def add_new_project(projects):
 
 
 def display_all_projects_with_index(projects):
+    """Display all projects and their index."""
     for i, project in enumerate(projects):
         print(f"{i} {project}")
 
@@ -161,6 +163,7 @@ def get_valid_project(projects, prompt):
 
 
 def update_project(projects):
+    """Update an existing project."""
     selected_project = get_valid_project(projects, "Project Choice: ")
     print(selected_project)
     new_percentage = get_valid_percentage("New percentage: ")

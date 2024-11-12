@@ -23,9 +23,12 @@ def main():
         elif choice == "S":
             pass
         elif choice == "D":
-            display_projects(projects)
+            display_incomplete_projects(projects)
+            display_completed_projects(projects)
         elif choice == "F":
-            pass
+            date = get_valid_date("Show projects that start after date (dd/mm/yy): ")
+            filtered_projects_by_date = filter_projects_by_date(date, projects)
+            display_incomplete_projects(filtered_projects_by_date)
         elif choice == "A":
             pass
         elif choice == "U":
@@ -47,13 +50,37 @@ def load_projects(projects, filename):
             projects.append(project)
 
 
-def display_projects(projects):
-    """Display projects."""
+def display_incomplete_projects(projects):
+    """Display incomplete projects."""
+    projects.sort()
+    print("Incomplete Projects:")
+    [print(project) for project in projects if not project.is_complete()]
+
+
+def display_completed_projects(projects):
+    """Display completed projects."""
     projects.sort()
     print("Completed Projects:")
     [print(project) for project in projects if project.is_complete()]
-    print("Incomplete Projects:")
-    [print(project) for project in projects if not project.is_complete()]
+
+
+def get_valid_date(prompt):
+    """Get a valid date."""
+    is_valid_date = False
+    while not is_valid_date:
+        date_string = input(prompt).strip()
+        try:
+            valid_date = datetime.strptime(date_string, "%d/%m/%Y").date()
+            is_valid_date = True
+        except ValueError:
+            print("Invalid date format. Please use dd/mm/yyyy.")
+    return valid_date  # There will not be a case where this is unassigned.
+
+
+def filter_projects_by_date(date, projects):
+    """Filter projects by date."""
+    filtered_projects_by_date = [project for project in projects if project.start_date > date]
+    return filtered_projects_by_date
 
 
 main()

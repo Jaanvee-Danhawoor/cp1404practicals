@@ -34,7 +34,7 @@ def main():
         elif choice == "U":
             pass
         else:
-            print("Invalid choice")
+            print("Invalid choice.")
         print(MENU)
         choice = input("Enter your choice: ").upper()
 

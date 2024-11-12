@@ -30,7 +30,7 @@ def main():
             filtered_projects_by_date = filter_projects_by_date(date, projects)
             display_incomplete_projects(filtered_projects_by_date)
         elif choice == "A":
-            pass
+            add_new_project(projects)
         elif choice == "U":
             pass
         else:
@@ -81,6 +81,55 @@ def filter_projects_by_date(date, projects):
     """Filter projects by date."""
     filtered_projects_by_date = [project for project in projects if project.start_date > date]
     return filtered_projects_by_date
+
+
+def get_valid_name(prompt):
+    """Get a valid name that is not empty."""
+    valid_name = input(prompt).strip()
+    while not valid_name:
+        print("Input cannot be empty")
+        valid_name = input(prompt).strip()
+    return valid_name
+
+
+def get_valid_number(prompt):
+    """Get a valid number."""
+    is_valid_number = False
+    while not is_valid_number:
+        try:
+            valid_number = float(input(prompt))
+            if valid_number <= 0:
+                print("Number must be > 0")
+            else:
+                is_valid_number = True
+        except ValueError:
+            print("Invalid input; enter a valid number")
+    return valid_number  # There will not be a case where this is unassigned.
+
+
+def get_valid_percentage(prompt):
+    """Get a valid percentage between 0 and 100"""
+    is_valid_input = False
+    while not is_valid_input:
+        try:
+            percentage = float(input(prompt))
+            if 0 <= percentage <= 100:
+                is_valid_input = True
+            else:
+                print("Completion percentage must be between 0 and 100.")
+        except ValueError:
+            print("Invalid percentage; enter a valid number")
+    return percentage  # There will not be a case where this is unassigned.
+
+
+def add_new_project(projects):
+    name = get_valid_name("Name: ").title()
+    start_date = get_valid_date("Start date (dd/mm/yyyy): ")
+    priority = int(get_valid_number("Priority: "))
+    cost_estimate = get_valid_number("Cost estimate: ")
+    completion_percentage = get_valid_percentage("Percent complete: ")
+    new_project = Project(name, start_date, priority, cost_estimate, completion_percentage)
+    projects.append(new_project)
 
 
 main()

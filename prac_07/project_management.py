@@ -32,7 +32,7 @@ def main():
         elif choice == "A":
             add_new_project(projects)
         elif choice == "U":
-            pass
+            update_project(projects)
         else:
             print("Invalid choice.")
         print(MENU)
@@ -123,6 +123,7 @@ def get_valid_percentage(prompt):
 
 
 def add_new_project(projects):
+    print("Let's add a new project")
     name = get_valid_name("Name: ").title()
     start_date = get_valid_date("Start date (dd/mm/yyyy): ")
     priority = int(get_valid_number("Priority: "))
@@ -130,6 +131,34 @@ def add_new_project(projects):
     completion_percentage = get_valid_percentage("Percent complete: ")
     new_project = Project(name, start_date, priority, cost_estimate, completion_percentage)
     projects.append(new_project)
+
+
+def display_all_projects_with_index(projects):
+    for i, project in enumerate(projects):
+        print(f"{i} {project}")
+
+
+def get_valid_project(projects, prompt):
+    """Get a valid index below the length of the list."""
+    is_valid_index = False
+    while not is_valid_index:
+        try:
+            valid_index = int(input(prompt))
+            valid_project = projects[valid_index]
+        except KeyError:
+            print(f"Invalid index; index must be between 0 and {len(projects) - 1} inclusive")
+        except ValueError:
+            print("Invalid input; enter a valid number")
+    return valid_project  # There will not be a case where this is unassigned.
+
+
+def update_project(projects):
+    selected_project = get_valid_project(projects, "Project Choice: ")
+    print(selected_project)
+    new_percentage = get_valid_percentage("New percentage: ")
+    new_priority = get_valid_number("New priority: ")
+    selected_project.completion_percentage = new_percentage
+    selected_project.priority = new_priority
 
 
 main()

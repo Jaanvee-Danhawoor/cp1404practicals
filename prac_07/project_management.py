@@ -6,24 +6,27 @@ Actual:
 from datetime import datetime
 from project import Project
 
-DEFAULT_FILENAME = "projects.txt"
+FILENAME = "projects.txt"
 MENU = ("(L)oad projects\n(S)ave projects\n(D)isplay projects\n"
-        "(F)ilter by date\n(A)dd new project\n(U)pdate project")
+        "(F)ilter projects by date\n(A)dd new project\n(U)pdate project\n(Q)uit")
 
 
 def main():
+    """Menu-driven program to load data from a text file, update projects and save back to file."""
     projects = []
-    load_projects(projects, DEFAULT_FILENAME)
+    load_projects(projects)
+    print(f"Loaded {len(projects)} projects from {FILENAME}")
     print(MENU)
-    choice = input("Enter your choice: ").upper()
+    choice = input(">>> ").upper()
     while choice != "Q":
         if choice == "L":
-            filename = input("Enter filename: ")
-            load_projects(projects, filename)
+            load_projects(projects)
         elif choice == "S":
-            pass
+            save_projects(projects)
         elif choice == "D":
+            print("Incomplete Projects:")
             display_incomplete_projects(projects)
+            print("Completed Projects:")
             display_completed_projects(projects)
         elif choice == "F":
             date = get_valid_date("Show projects that start after date (dd/mm/yy): ")
@@ -32,16 +35,22 @@ def main():
         elif choice == "A":
             add_new_project(projects)
         elif choice == "U":
+            display_all_projects_with_index(projects)
             update_project(projects)
         else:
             print("Invalid choice.")
         print(MENU)
-        choice = input("Enter your choice: ").upper()
+        choice = input(">>> ").upper()
+    save_option = input("Would you like to save to projects.txt? (Y/n): ").lower()
+    if save_option != "n":
+        save_projects(projects)
+        print("Projects saved")
+    print("Thank you for using custom-built project management software.")
 
 
-def load_projects(projects, filename):
+def load_projects(projects):
     """Load projects from file."""
-    with open(filename, "r", encoding="utf-8-sig") as in_file:
+    with open(FILENAME, "r", encoding="utf-8-sig") as in_file:
         in_file.readline()  # Ignore header
         for line in in_file:
             parts = line.strip().split("\t")
@@ -53,15 +62,13 @@ def load_projects(projects, filename):
 def display_incomplete_projects(projects):
     """Display incomplete projects."""
     projects.sort()
-    print("Incomplete Projects:")
-    [print(project) for project in projects if not project.is_complete()]
+    [print(f" {project}") for project in projects if not project.is_complete()]
 
 
 def display_completed_projects(projects):
     """Display completed projects."""
     projects.sort()
-    print("Completed Projects:")
-    [print(project) for project in projects if project.is_complete()]
+    [print(f" {project}") for project in projects if project.is_complete()]
 
 
 def get_valid_date(prompt):
@@ -79,7 +86,7 @@ def get_valid_date(prompt):
 
 def filter_projects_by_date(date, projects):
     """Filter projects by date."""
-    filtered_projects_by_date = [project for project in projects if project.start_date > date]
+    filtered_projects_by_date = [project for project in projects if project.start_date >= date]
     return filtered_projects_by_date
 
 
@@ -145,6 +152,7 @@ def get_valid_project(projects, prompt):
         try:
             valid_index = int(input(prompt))
             valid_project = projects[valid_index]
+            is_valid_index = True
         except KeyError:
             print(f"Invalid index; index must be between 0 and {len(projects) - 1} inclusive")
         except ValueError:
@@ -159,6 +167,13 @@ def update_project(projects):
     new_priority = get_valid_number("New priority: ")
     selected_project.completion_percentage = new_percentage
     selected_project.priority = new_priority
+
+
+def save_projects(projects):
+    """Save a projects list to file."""
+    with open(FILENAME, "w", encoding="utf-8-sig") as out_file:
+        for project in projects:
+            out_file.write(f"{project}\t")
 
 
 main()

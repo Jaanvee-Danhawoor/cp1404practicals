@@ -1,7 +1,7 @@
 """
 Project Management Program
 Estimate: 3 hours
-Actual:
+Actual: 5 hours
 """
 from datetime import datetime
 from project import Project

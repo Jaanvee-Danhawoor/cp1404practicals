@@ -1,0 +1,19 @@
+BoxLayout:
+    orientation: 'vertical'
+    BoxLayout:
+        orientation: 'horizontal'
+        TextInput:
+            id: input_miles
+            text: '34'
+        BoxLayout:
+            orientation: 'vertical'
+            Button:
+                text: 'Up'
+            Button:
+                text: 'Down'
+    Button:
+        text: 'Convert miles to kms'
+    Label:
+        id: output_label
+        text: ''
+        color: (1, 1, 0, 1)

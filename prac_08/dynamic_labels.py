@@ -4,15 +4,15 @@ from kivy.uix.label import Label
 
 
 class DynamicLabels(App):
-    """Kivy App for showcasing dynamic labels."""
+    """Main program - Kivy app to demo dynamic labels creation."""
 
     def __init__(self, **kwargs):
-        """Initialises dynamic labels instance with the keyword argument names."""
+        """Construct main app."""
         super().__init__(**kwargs)
         self.names = ["Bob Brown", "Cat Cyan", "Oren Ochre"]
 
     def build(self):
-        """Builds the Kivy App from the kv file."""
+        """Build the Kivy GUI."""
         self.title = "Dynamic Labels"
         self.root = Builder.load_file('dynamic_labels.kv')
         self.create_labels()

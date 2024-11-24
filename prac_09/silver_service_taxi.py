@@ -1,7 +1,7 @@
 from taxi import Taxi
 
 
-class SilverService(Taxi):
+class SilverServiceTaxi(Taxi):
     """Specialised version of a Taxi that includes fanciness."""
     flagfall = 4.50
 

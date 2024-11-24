@@ -19,14 +19,15 @@ def main():
             current_taxi = get_current_taxi(taxis)
         elif choice == "d":
             if current_taxi is not None:
-                distance_to_be_driven = int(input("Drive how far? "))
-                distance_driven = current_taxi.drive(distance_to_be_driven)
-                fare = current_taxi.get_fare(distance_driven)
+                current_taxi.start_fare()
+                distance = int(input("Drive how far? "))
+                current_taxi.drive(distance)
+                fare = current_taxi.get_fare()
                 print(f"Your {current_taxi.name} trip cost you ${fare:.2f}")
+                bill += fare
             else:
                 print("You need to choose a taxi before you can drive")
-                fare = 0
-            bill += fare
+
         else:
             print("Invalid option")
         print(f"Bill to date: ${bill:.2f}")

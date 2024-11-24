@@ -19,7 +19,9 @@ def main():
             current_taxi = get_current_taxi(taxis)
         elif choice == "d":
             if current_taxi is not None:
-                fare = calculate_fare(current_taxi)
+                distance_to_be_driven = int(input("Drive how far? "))
+                distance_driven = current_taxi.drive(distance_to_be_driven)
+                fare = current_taxi.get_fare(distance_driven)
                 print(f"Your {current_taxi.name} trip cost you ${fare:.2f}")
             else:
                 print("You need to choose a taxi before you can drive")
@@ -41,12 +43,6 @@ def get_current_taxi(taxis):
         return taxis[index]
     except IndexError:
         print("Invalid taxi choice")
-
-
-def calculate_fare(current_taxi):
-    distance = int(input("Drive how far? "))
-    current_taxi.drive(distance)
-    return current_taxi.get_fare()
 
 
 def display_available_taxis(taxis):

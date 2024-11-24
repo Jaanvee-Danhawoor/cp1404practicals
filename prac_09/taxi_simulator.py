@@ -1,3 +1,4 @@
+"""Taxi simulator program."""
 from silver_service_taxi import SilverServiceTaxi
 from taxi import Taxi
 
@@ -5,6 +6,7 @@ MENU = "q)uit, c)hoose taxi, d)rive"
 
 
 def main():
+    """Menu program to drive chosen taxi and display cost of trip."""
     bill = 0
     current_taxi = None
     taxis = [Taxi("Prius", 100), SilverServiceTaxi("Limo", 100, 2),
@@ -33,12 +35,13 @@ def main():
         print(f"Bill to date: ${bill:.2f}")
         print(MENU)
         choice = input(">>> ").lower()
-    print(f"Total trip cost: ${bill}")
+    print(f"Total trip cost: ${bill:.2f}")
     print("Taxis are now: ")
     display_available_taxis(taxis)
 
 
 def get_current_taxi(taxis):
+    """Get current taxi."""
     index = int(input("Choose taxi: "))
     try:
         return taxis[index]
@@ -47,6 +50,7 @@ def get_current_taxi(taxis):
 
 
 def display_available_taxis(taxis):
+    """Print available taxis."""
     for i, taxi in enumerate(taxis):
         print(f"{i} - {taxi}")
 

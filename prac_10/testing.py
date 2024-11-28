@@ -52,16 +52,15 @@ def run_tests():
     assert car.fuel == 0
 
 
-run_tests()
-
 # 3. Uncomment the following line and run the doctests
 # (PyCharm may see your >>> doctest comments and run doctests anyway.)
-doctest.testmod()
+# doctest.testmod()
+
 
 # 4. Fix the failing is_long_word function
 # (Don't change the tests, change the function!)
 
-# TODO: 5. Write and test a function to format a phrase as a sentence,
+# 5. Write and test a function to format a phrase as a sentence,
 # starting with a capital and ending with a single full stop.
 # Important: start with a function header and just use pass as the body
 # then add doctests for 3 tests:
@@ -70,3 +69,24 @@ doctest.testmod()
 # and one more that you decide is a useful test.
 # Run your doctests and watch the tests fail.
 # Then write the body of the function so that the tests pass.
+def format_phrase_to_sentence(phrase):
+    """
+    Format a phrase as a sentence, starting with a capital and ending with a full stop.
+    >>> format_phrase_to_sentence('hello')
+    'Hello.'
+    >>> format_phrase_to_sentence('It is an ex parrot.')
+    'It is an ex parrot.'
+    >>> format_phrase_to_sentence('I live on campus')
+    'I live on campus.'
+    """
+    # Capitalise the first letter of the first word.
+    sentence = phrase.capitalize()
+    # Add a full stop if needed.
+    if sentence[-1] != '.':
+        sentence = f"{sentence}."
+    return sentence
+
+
+doctest.testmod()
+
+run_tests()
